@@ -1,10 +1,292 @@
-var L=Object.defineProperty;var w=Object.getOwnPropertySymbols;var I=Object.prototype.hasOwnProperty,M=Object.prototype.propertyIsEnumerable;var _=(a,e,t)=>e in a?L(a,e,{enumerable:!0,configurable:!0,writable:!0,value:t}):a[e]=t,v=(a,e)=>{for(var t in e||(e={}))I.call(e,t)&&_(a,t,e[t]);if(w)for(var t of w(e))M.call(e,t)&&_(a,t,e[t]);return a};import{E,l as z,g as n,a as i,C as g,W as p,S as f,P as x,b as k,c as y,V as h,M as u,T,R as j,i as R,G as D,d as P,e as c,A as b,f as O,D as U,h as q,j as H,k as A}from"./vendor.js";const B=function(){const e=document.createElement("link").relList;if(e&&e.supports&&e.supports("modulepreload"))return;for(const r of document.querySelectorAll('link[rel="modulepreload"]'))o(r);new MutationObserver(r=>{for(const s of r)if(s.type==="childList")for(const l of s.addedNodes)l.tagName==="LINK"&&l.rel==="modulepreload"&&o(l)}).observe(document,{childList:!0,subtree:!0});function t(r){const s={};return r.integrity&&(s.integrity=r.integrity),r.referrerpolicy&&(s.referrerPolicy=r.referrerpolicy),r.crossorigin==="use-credentials"?s.credentials="include":r.crossorigin==="anonymous"?s.credentials="omit":s.credentials="same-origin",s}function o(r){if(r.ep)return;r.ep=!0;const s=t(r);fetch(r.href,s)}};B();class d extends E{constructor({element:e,elements:t}){super();this.selector=e,this.selectorChildren=v({},t),this.create(),this.addEventListeners()}create(){this.selector instanceof window.HTMLElement?this.element=this.selector:this.element=document.querySelector(this.selector),this.elements={},z.exports.each(this.selectorChildren,(e,t)=>{e instanceof window.HTMLElement||e instanceof window.NodeList||Array.isArray(e)?this.elements[t]=e:(this.elements[t]=document.querySelectorAll(e),this.elements[t].length===0?this.elements[t]=null:this.elements[t].length===1&&(this.elements[t]=document.querySelector(e)))})}addEventListeners(){}removeEventListeners(){}}class G extends d{constructor(){super({componentId:"Preloader",element:".l__preloader",elements:{subline:".preloader__subline"}});this.isDesktop=window.innerWidth>1024,this.allImages=document.querySelectorAll("img"),this.createLoader()}createLoader(){window.addEventListener("load",()=>{this.onLoaded()})}onLoaded(){return new Promise(e=>{this.emit("completed");const t=n.timeline();this.isDesktop?(t.to(".preloader__roll",{opacity:0,duration:1,ease:i.easeOut},"out"),t.to(this.element,{xPercent:-100,ease:i.easeInOut,duration:1.5},"out+=0.5"),t.to(this.elements.subline,{xPercent:-100,ease:i.easeInOut,duration:1.6},"out+=0.55"),n.to(".preloader__blackline",{xPercent:-100,delay:.05,duration:1.6,ease:i.easeInOut},"")):(t.to(this.element,{yPercent:-100,ease:i.easeInOut,duration:1.5},"out+=0.5"),t.to(this.elements.subline,{yPercent:-100,ease:i.easeInOut,duration:1.6},"out+=0.55"),n.to(".preloader__blackline",{yPercent:-100,delay:.05,duration:1.6,ease:i.easeInOut},""))})}}class S{constructor({element:e,elements:t,id:o}){this.selector=e,this.selectorChildren=v({},t),this.id=o}create(){this.element=document.querySelector(this.selector),this.elements={},z.exports.each(this.selectorChildren,(e,t)=>{e instanceof window.HTMLElement||e instanceof window.NodeList||Array.isArray(e)?this.elements[t]=e:this.elements[t]=document.querySelectorAll(e),this.elements[t].length===0?this.elements[t]:this.elements[t].length===1&&(this.elements[t]=document.querySelector(e))})}}class C extends d{constructor(e,t){super({componentId:"navbar",element:".l__navbar",elements:{navbarLink:".l__navbar .menu-item",navbarLogo:".navbar__logo",projects:".l__projects",about:".l__about",contact:".l__contact",hamburgah:".hamburger__menu",mobileMenu:".menu__mobile",close:".menu__mobile--close",mobileMenuItem:".mobile__menu--item"}});this.asscroll=e,this.navbarSize=document.querySelector(".l__navbar").offsetHeight,this.elements.navbarLink&&(this.sectionsPosition=[document.querySelector(".l__projects").getBoundingClientRect().left,document.querySelector(".l__about").getBoundingClientRect().left+window.innerHeight,document.querySelector(".l__contact").getBoundingClientRect().left+window.innerHeight],this.initClick()),this.initLogoClick()}initClick(){this.elements.navbarLink.forEach((e,t)=>{e.addEventListener("click",o=>{o.preventDefault();let r=0;t===0&&(r=this.sectionsPosition[0]),t===1&&(r=this.sectionsPosition[1]+document.querySelector(".pin-spacer").offsetHeight),t===2&&(r=2e4),this.asscroll.scrollTo(r)})})}initLogoClick(){this.elements.navbarLogo.addEventListener("click",e=>{e.preventDefault(),window.innerWidth>1024?(n.to(".preloader__subline",{xPercent:0,duration:1.5,ease:i.easeInOut}),n.to(".preloader__blackline",{xPercent:0,delay:.05,duration:1.6,ease:i.easeInOut,onComplete:()=>window.location.href="/"})):(n.to(".preloader__subline",{yPercent:0,duration:1.5,ease:i.easeInOut,onComplete:()=>window.location.href="/"}),n.to(".preloader__blackline",{yPercent:0,delay:.05,duration:1.6,ease:i.easeInOut,onComplete:()=>window.location.href="/"}))}),this.elements.hamburgah&&(this.elements.hamburgah.addEventListener("click",e=>{e.preventDefault(),n.to(".preloader__subline",{yPercent:100,duration:1.5,ease:i.easeInOut}),n.to(this.elements.mobileMenu,{y:"0%",duration:1.5,ease:i.easeInOut,delay:.05})}),this.elements.close.addEventListener("click",e=>{e.preventDefault(),n.to(".preloader__subline",{yPercent:-100,duration:1.5,ease:i.easeInOut}),n.to(".preloader__blackline",{xPercent:-100,delay:.05,duration:1.6,ease:i.easeInOut}),n.to(this.elements.mobileMenu,{y:"-100%",duration:1.5,ease:i.easeInOut,delay:.05})}),this.elements.mobileMenuItem.forEach((e,t)=>{e.addEventListener("click",o=>{o.preventDefault(),n.to(".preloader__subline",{yPercent:-100,duration:1.5,ease:i.easeInOut}),n.to(".preloader__blackline",{xPercent:-100,delay:.05,duration:1.6,ease:i.easeInOut}),n.to(this.elements.mobileMenu,{y:"-100%",duration:1.5,ease:i.easeInOut,delay:.05,onComplete:()=>this.asscroll.scrollTo(document.querySelectorAll(".section")[t].getBoundingClientRect().top-this.navbarSize)})})}))}removeEventListeners(){}}var W=`varying vec2 vUv;
+var L = Object.defineProperty;
+var w = Object.getOwnPropertySymbols;
+var I = Object.prototype.hasOwnProperty
+  , M = Object.prototype.propertyIsEnumerable;
+var _ = (a,e,t)=>e in a ? L(a, e, {
+    enumerable: !0,
+    configurable: !0,
+    writable: !0,
+    value: t
+}) : a[e] = t
+  , v = (a,e)=>{
+    for (var t in e || (e = {}))
+        I.call(e, t) && _(a, t, e[t]);
+    if (w)
+        for (var t of w(e))
+            M.call(e, t) && _(a, t, e[t]);
+    return a
+}
+;
+import {E, l as z, g as n, a as i, C as g, W as p, S as f, P as x, b as k, c as y, V as h, M as u, T, R as j, i as R, G as D, d as P, e as c, A as b, f as O, D as U, h as q, j as H, k as A} from "./vendor.js";
+const B = function() {
+    const e = document.createElement("link").relList;
+    if (e && e.supports && e.supports("modulepreload"))
+        return;
+    for (const r of document.querySelectorAll('link[rel="modulepreload"]'))
+        o(r);
+    new MutationObserver(r=>{
+        for (const s of r)
+            if (s.type === "childList")
+                for (const l of s.addedNodes)
+                    l.tagName === "LINK" && l.rel === "modulepreload" && o(l)
+    }
+    ).observe(document, {
+        childList: !0,
+        subtree: !0
+    });
+    function t(r) {
+        const s = {};
+        return r.integrity && (s.integrity = r.integrity),
+        r.referrerpolicy && (s.referrerPolicy = r.referrerpolicy),
+        r.crossorigin === "use-credentials" ? s.credentials = "include" : r.crossorigin === "anonymous" ? s.credentials = "omit" : s.credentials = "same-origin",
+        s
+    }
+    function o(r) {
+        if (r.ep)
+            return;
+        r.ep = !0;
+        const s = t(r);
+        fetch(r.href, s)
+    }
+};
+B();
+class d extends E {
+    constructor({element: e, elements: t}) {
+        super();
+        this.selector = e,
+        this.selectorChildren = v({}, t),
+        this.create(),
+        this.addEventListeners()
+    }
+    create() {
+        this.selector instanceof window.HTMLElement ? this.element = this.selector : this.element = document.querySelector(this.selector),
+        this.elements = {},
+        z.exports.each(this.selectorChildren, (e,t)=>{
+            e instanceof window.HTMLElement || e instanceof window.NodeList || Array.isArray(e) ? this.elements[t] = e : (this.elements[t] = document.querySelectorAll(e),
+            this.elements[t].length === 0 ? this.elements[t] = null : this.elements[t].length === 1 && (this.elements[t] = document.querySelector(e)))
+        }
+        )
+    }
+    addEventListeners() {}
+    removeEventListeners() {}
+}
+class G extends d {
+    constructor() {
+        super({
+            componentId: "Preloader",
+            element: ".l__preloader",
+            elements: {
+                subline: ".preloader__subline"
+            }
+        });
+        this.isDesktop = window.innerWidth > 1024,
+        this.allImages = document.querySelectorAll("img"),
+        this.createLoader()
+    }
+    createLoader() {
+        window.addEventListener("load", ()=>{
+            this.onLoaded()
+        }
+        )
+    }
+    onLoaded() {
+        return new Promise(e=>{
+            this.emit("completed");
+            const t = n.timeline();
+            this.isDesktop ? (t.to(".preloader__roll", {
+                opacity: 0,
+                duration: 1,
+                ease: i.easeOut
+            }, "out"),
+            t.to(this.element, {
+                xPercent: -100,
+                ease: i.easeInOut,
+                duration: 1.5
+            }, "out+=0.5"),
+            t.to(this.elements.subline, {
+                xPercent: -100,
+                ease: i.easeInOut,
+                duration: 1.6
+            }, "out+=0.55"),
+            n.to(".preloader__blackline", {
+                xPercent: -100,
+                delay: .05,
+                duration: 1.6,
+                ease: i.easeInOut
+            }, "")) : (t.to(this.element, {
+                yPercent: -100,
+                ease: i.easeInOut,
+                duration: 1.5
+            }, "out+=0.5"),
+            t.to(this.elements.subline, {
+                yPercent: -100,
+                ease: i.easeInOut,
+                duration: 1.6
+            }, "out+=0.55"),
+            n.to(".preloader__blackline", {
+                yPercent: -100,
+                delay: .05,
+                duration: 1.6,
+                ease: i.easeInOut
+            }, ""))
+        }
+        )
+    }
+}
+class S {
+    constructor({element: e, elements: t, id: o}) {
+        this.selector = e,
+        this.selectorChildren = v({}, t),
+        this.id = o
+    }
+    create() {
+        this.element = document.querySelector(this.selector),
+        this.elements = {},
+        z.exports.each(this.selectorChildren, (e,t)=>{
+            e instanceof window.HTMLElement || e instanceof window.NodeList || Array.isArray(e) ? this.elements[t] = e : this.elements[t] = document.querySelectorAll(e),
+            this.elements[t].length === 0 ? this.elements[t] : this.elements[t].length === 1 && (this.elements[t] = document.querySelector(e))
+        }
+        )
+    }
+}
+class C extends d {
+    constructor(e, t) {
+        super({
+            componentId: "navbar",
+            element: ".l__navbar",
+            elements: {
+                navbarLink: ".l__navbar .menu-item",
+                navbarLogo: ".navbar__logo",
+                projects: ".l__projects",
+                about: ".l__about",
+                contact: ".l__contact",
+                hamburgah: ".hamburger__menu",
+                mobileMenu: ".menu__mobile",
+                close: ".menu__mobile--close",
+                mobileMenuItem: ".mobile__menu--item"
+            }
+        });
+        this.asscroll = e,
+        this.navbarSize = document.querySelector(".l__navbar").offsetHeight,
+        this.elements.navbarLink && (this.sectionsPosition = [document.querySelector(".l__contact").getBoundingClientRect().left + window.innerHeight],
+        this.initClick()),
+        this.initLogoClick()
+    }
+    initClick() {
+        this.elements.navbarLink.forEach((e,t)=>{
+            e.addEventListener("click", o=>{
+                o.preventDefault();
+                let r = 0;
+                t === 0 && (r = this.sectionsPosition[0]),
+                t === 1 && (r = this.sectionsPosition[1] + document.querySelector(".pin-spacer").offsetHeight),
+                t === 2 && (r = 2e4),
+                this.asscroll.scrollTo(r)
+            }
+            )
+        }
+        )
+    }
+    initLogoClick() {
+        this.elements.navbarLogo.addEventListener("click", e=>{
+            e.preventDefault(),
+            window.innerWidth > 1024 ? (n.to(".preloader__subline", {
+                xPercent: 0,
+                duration: 1.5,
+                ease: i.easeInOut
+            }),
+            n.to(".preloader__blackline", {
+                xPercent: 0,
+                delay: .05,
+                duration: 1.6,
+                ease: i.easeInOut,
+                onComplete: ()=>window.location.href = "/"
+            })) : (n.to(".preloader__subline", {
+                yPercent: 0,
+                duration: 1.5,
+                ease: i.easeInOut,
+                onComplete: ()=>window.location.href = "/"
+            }),
+            n.to(".preloader__blackline", {
+                yPercent: 0,
+                delay: .05,
+                duration: 1.6,
+                ease: i.easeInOut,
+                onComplete: ()=>window.location.href = "/"
+            }))
+        }
+        ),
+        this.elements.hamburgah && (this.elements.hamburgah.addEventListener("click", e=>{
+            e.preventDefault(),
+            n.to(".preloader__subline", {
+                yPercent: 100,
+                duration: 1.5,
+                ease: i.easeInOut
+            }),
+            n.to(this.elements.mobileMenu, {
+                y: "0%",
+                duration: 1.5,
+                ease: i.easeInOut,
+                delay: .05
+            })
+        }
+        ),
+        this.elements.close.addEventListener("click", e=>{
+            e.preventDefault(),
+            n.to(".preloader__subline", {
+                yPercent: -100,
+                duration: 1.5,
+                ease: i.easeInOut
+            }),
+            n.to(".preloader__blackline", {
+                xPercent: -100,
+                delay: .05,
+                duration: 1.6,
+                ease: i.easeInOut
+            }),
+            n.to(this.elements.mobileMenu, {
+                y: "-100%",
+                duration: 1.5,
+                ease: i.easeInOut,
+                delay: .05
+            })
+        }
+        ),
+        this.elements.mobileMenuItem.forEach((e,t)=>{
+            e.addEventListener("click", o=>{
+                o.preventDefault(),
+                n.to(".preloader__subline", {
+                    yPercent: -100,
+                    duration: 1.5,
+                    ease: i.easeInOut
+                }),
+                n.to(".preloader__blackline", {
+                    xPercent: -100,
+                    delay: .05,
+                    duration: 1.6,
+                    ease: i.easeInOut
+                }),
+                n.to(this.elements.mobileMenu, {
+                    y: "-100%",
+                    duration: 1.5,
+                    ease: i.easeInOut,
+                    delay: .05,
+                    onComplete: ()=>this.asscroll.scrollTo(document.querySelectorAll(".section")[t].getBoundingClientRect().top - this.navbarSize)
+                })
+            }
+            )
+        }
+        ))
+    }
+    removeEventListeners() {}
+}
+var W = `varying vec2 vUv;
 
 void main() {\r
     gl_Position = projectionMatrix * viewMatrix * modelMatrix * vec4(position, 1.0);
 
     vUv = uv;\r
-}`,$=`uniform vec2 uResolution;\r
+}`
+  , $ = `uniform vec2 uResolution;\r
 uniform float uTime;
 
 varying vec2 vUv;
@@ -211,7 +493,158 @@ float snoise(vec3 v)\r
                 gl_FragColor=vec4(color,1.);\r
                 \r
                 gl_FragColor=vec4(cos(len + g),cos(len + g),cos(len + g),1.);\r
-            }`;function m(a,e,t){return a*(1-t)+e*t}class N{constructor(){this.element=document.querySelector(".l__landing"),this.viewport={width:window.innerWidth,height:window.innerHeight},this.mouse={x:0,y:0},this.clock=new g,this.update=this.update.bind(this),this.init()}init(){this.addCanvas(),this.addScene(),this.addCamera(),this.addMesh(),this.addEventListeners(),this.onResize(),this.update()}addCanvas(){this.renderer=new p({alpha:!0,powerPreference:"high-performance"}),this.canvas=this.renderer.domElement,this.canvas.classList.add("webgl"),this.element.appendChild(this.canvas)}addScene(){this.scene=new f}addCamera(){this.camera=new x(75,this.viewport.width/this.viewport.height,.1,10),this.camera.position.set(0,0,2.5),this.scene.add(this.camera)}addMesh(){this.geometry=new k(1.1,32,32),this.material=new y({fragmentShader:$,vertexShader:W,uniforms:{uResolution:{value:new h(this.viewport.width,this.viewport.height)},uTime:{value:0},uMouse:{value:new h(this.mouse.x,this.mouse.y)}}}),this.mesh=new u(this.geometry,this.material),this.scene.add(this.mesh)}addControls(){this.controls=new OrbitControls(this.camera,this.renderer.domElement)}addEventListeners(){window.addEventListener("resize",this.onResize.bind(this)),window.addEventListener("mousemove",e=>{this.onMouseMove(e)})}onResize(){this.viewport={width:window.innerWidth,height:window.innerHeight},this.camera.aspect=this.viewport.width/this.viewport.height,this.camera.updateProjectionMatrix(),this.renderer.setSize(this.viewport.width,this.viewport.height),this.renderer.setPixelRatio(Math.min(window.devicePixelRatio,1.5))}onMouseMove(e){let t=this.mouse.x,o=this.mouse.y;this.mouse.x=m(t,e.clientX/this.viewport.width-.5,1),this.mouse.y=m(o,e.clientY/this.viewport.height-.5,1)}update(){this.render(),this.mesh.rotation.y=m(this.mesh.rotation.y,this.mouse.x,.075),this.mesh.rotation.x=m(this.mesh.rotation.x,this.mouse.y,.075),this.material.uniforms.uTime.value=this.clock.getElapsedTime(),window.requestAnimationFrame(this.update)}render(){this.renderer.render(this.scene,this.camera)}}class F extends d{constructor(e){super({componentId:"Landing",element:".l__landing",elements:{titleMiddle:".landing__centered-content__title.title_middle",titleBottom:".landing__centered-content__title.title_bottom",subtitle:".landing__centered-content__subtitle"}});this.isDesktop=e,this.isDesktop&&this.loadCanvas()}loadCanvas(){new N}show(){if(this.isDesktop){const e=n.timeline();e.to(this.elements.titleMiddle,{x:"-25rem",delay:.8,duration:1.5,ease:i.easeInOut},"show"),e.to(this.elements.titleBottom,{x:"10rem",delay:.8,duration:1.5,ease:i.easeInOut},"show"),e.to(".preloader__blackline",{xPercent:-100,delay:.8,duration:.1,ease:i.easeInOut},"show"),e.to(this.elements.subtitle,{xPercent:100,delay:.8,duration:1.5,ease:i.easeInOut},"show")}}addEventListeners(){}removeEventListeners(){}}var V=`varying vec2 vUv;\r
+            }`;
+function m(a, e, t) {
+    return a * (1 - t) + e * t
+}
+class N {
+    constructor() {
+        this.element = document.querySelector(".l__landing"),
+        this.viewport = {
+            width: window.innerWidth,
+            height: window.innerHeight
+        },
+        this.mouse = {
+            x: 0,
+            y: 0
+        },
+        this.clock = new g,
+        this.update = this.update.bind(this),
+        this.init()
+    }
+    init() {
+        this.addCanvas(),
+        this.addScene(),
+        this.addCamera(),
+        this.addMesh(),
+        this.addEventListeners(),
+        this.onResize(),
+        this.update()
+    }
+    addCanvas() {
+        this.renderer = new p({
+            alpha: !0,
+            powerPreference: "high-performance"
+        }),
+        this.canvas = this.renderer.domElement,
+        this.canvas.classList.add("webgl"),
+        this.element.appendChild(this.canvas)
+    }
+    addScene() {
+        this.scene = new f
+    }
+    addCamera() {
+        this.camera = new x(75,this.viewport.width / this.viewport.height,.1,10),
+        this.camera.position.set(0, 0, 2.5),
+        this.scene.add(this.camera)
+    }
+    addMesh() {
+        this.geometry = new k(1.1,32,32),
+        this.material = new y({
+            fragmentShader: $,
+            vertexShader: W,
+            uniforms: {
+                uResolution: {
+                    value: new h(this.viewport.width,this.viewport.height)
+                },
+                uTime: {
+                    value: 0
+                },
+                uMouse: {
+                    value: new h(this.mouse.x,this.mouse.y)
+                }
+            }
+        }),
+        this.mesh = new u(this.geometry,this.material),
+        this.scene.add(this.mesh)
+    }
+    addControls() {
+        this.controls = new OrbitControls(this.camera,this.renderer.domElement)
+    }
+    addEventListeners() {
+        window.addEventListener("resize", this.onResize.bind(this)),
+        window.addEventListener("mousemove", e=>{
+            this.onMouseMove(e)
+        }
+        )
+    }
+    onResize() {
+        this.viewport = {
+            width: window.innerWidth,
+            height: window.innerHeight
+        },
+        this.camera.aspect = this.viewport.width / this.viewport.height,
+        this.camera.updateProjectionMatrix(),
+        this.renderer.setSize(this.viewport.width, this.viewport.height),
+        this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5))
+    }
+    onMouseMove(e) {
+        let t = this.mouse.x
+          , o = this.mouse.y;
+        this.mouse.x = m(t, e.clientX / this.viewport.width - .5, 1),
+        this.mouse.y = m(o, e.clientY / this.viewport.height - .5, 1)
+    }
+    update() {
+        this.render(),
+        this.mesh.rotation.y = m(this.mesh.rotation.y, this.mouse.x, .075),
+        this.mesh.rotation.x = m(this.mesh.rotation.x, this.mouse.y, .075),
+        this.material.uniforms.uTime.value = this.clock.getElapsedTime(),
+        window.requestAnimationFrame(this.update)
+    }
+    render() {
+        this.renderer.render(this.scene, this.camera)
+    }
+}
+class F extends d {
+    constructor(e) {
+        super({
+            componentId: "Landing",
+            element: ".l__landing",
+            elements: {
+                titleMiddle: ".landing__centered-content__title.title_middle",
+                titleBottom: ".landing__centered-content__title.title_bottom",
+                subtitle: ".landing__centered-content__subtitle"
+            }
+        });
+        this.isDesktop = e,
+        this.isDesktop && this.loadCanvas()
+    }
+    loadCanvas() {
+        new N
+    }
+    show() {
+        if (this.isDesktop) {
+            const e = n.timeline();
+            e.to(this.elements.titleMiddle, {
+                x: "-25rem",
+                delay: .8,
+                duration: 1.5,
+                ease: i.easeInOut
+            }, "show"),
+            e.to(this.elements.titleBottom, {
+                x: "10rem",
+                delay: .8,
+                duration: 1.5,
+                ease: i.easeInOut
+            }, "show"),
+            e.to(".preloader__blackline", {
+                xPercent: -100,
+                delay: .8,
+                duration: .1,
+                ease: i.easeInOut
+            }, "show"),
+            e.to(this.elements.subtitle, {
+                xPercent: 100,
+                delay: .8,
+                duration: 1.5,
+                ease: i.easeInOut
+            }, "show")
+        }
+    }
+    addEventListeners() {}
+    removeEventListeners() {}
+}
+var V = `varying vec2 vUv;\r
 #define PI 3.1415926535897932384626433832795
 
 uniform float uScrollSpeed;\r
@@ -233,13 +666,486 @@ void main() {
     gl_Position = projectionMatrix * newPosition;
 
     vUv = uv;\r
-}`,X=`uniform sampler2D uImage;
+}`
+  , X = `uniform sampler2D uImage;
 
 varying vec2 vUv;
 
 void main(){\r
     gl_FragColor=texture2D(uImage,vUv);\r
-}`;class Y{constructor(e){this.element=e.dom,this.asscroll=e.asscroll,this.viewport={width:window.innerWidth,height:window.innerHeight},this.loader=new T,this.scrollSpeed=0,this.clock=new g,this.update=this.update.bind(this),this.allImages=[...document.querySelectorAll(".project__item__img")],this.loadedLength=0,this.maxPos=document.querySelector(".about__separator").getBoundingClientRect().left+window.innerHeight,this.minPos=document.querySelector(".l__projects").getBoundingClientRect().left,this.mouse=new h,this.raycaster=new j;const t=new Promise((r,s)=>{R(document.querySelectorAll(".project__item__img"),{background:!0},r)});this.imagesGroup=new D;let o=[t];Promise.all(o).then(()=>{this.init()})}init(){this.addCanvas(),this.addScene(),this.addCamera(),this.addImages(),this.setImagesPositions(),this.onMouseMovement(),this.onResize(),this.addEventListeners(),this.update()}addCanvas(){this.renderer=new p({antialias:!0,alpha:!0,powerPreference:"high-performance"}),this.canvas=this.renderer.domElement,this.canvas.classList.add("webgl"),this.element.appendChild(this.canvas)}addScene(){this.scene=new f}addCamera(){this.camera=new x(70,this.viewport.width/this.viewport.height,100,2e3),this.scene.add(this.camera)}addImages(){this.material=new y({uniforms:{uTime:{value:0},uImage:{value:0},uHover:{value:new h(.5,.5)},uHoverState:{value:0},uScrollSpeed:{value:this.scrollSpeed},uViewportSizes:{value:new h(this.viewport.width,this.viewport.height)}},fragmentShader:X,vertexShader:V}),this.materials=[],this.imageStore=this.allImages.map(e=>{let t=e.getBoundingClientRect(),o=new P(t.width,t.height,16,16),r=this.loader.load(e.src);r.needsUpdate=!0;let s=this.material.clone();this.materials.push(s),s.uniforms.uImage.value=r;let l=new u(o,s);return this.imagesGroup.add(l),e.addEventListener("mouseenter",()=>{n.to(s.uniforms.uHoverState,{duration:1,value:1,ease:"power3.out"})}),e.addEventListener("mouseout",()=>{n.to(s.uniforms.uHoverState,{duration:1,value:0,ease:"power3.out"})}),{img:e,mesh:l,top:t.top-window.innerHeight,left:t.left-(window.innerWidth+document.querySelector(".l__separator").offsetWidth),width:t.width,height:t.height}})}setImagesPositions(){this.scene.add(this.imagesGroup),this.imageStore.forEach(e=>{e.mesh.position.y=-e.top-document.querySelector(".projects__container").getBoundingClientRect().top-this.viewport.height/2-e.height/2,e.mesh.position.x=e.left-this.viewport.width/2+e.width/2})}addEventListeners(){window.addEventListener("resize",this.onResize.bind(this)),window.addEventListener("wheel",e=>{this.scrollSpeed=(this.asscroll.currentPos-this.asscroll.targetPos)/this.viewport.width*15})}onResize(){this.viewport={width:window.innerWidth,height:window.innerHeight},this.camera.position.z=700,this.camera.fov=2*Math.atan(this.viewport.height/2/this.camera.position.z)*(180/Math.PI),this.camera.aspect=this.viewport.width/this.viewport.height,this.camera.updateProjectionMatrix(),this.renderer.setSize(this.viewport.width,this.viewport.height),this.renderer.setPixelRatio(Math.min(window.devicePixelRatio,1.5)),this.setImagesPositions()}onMouseMovement(){window.addEventListener("mousemove",e=>{this.mouse.x=e.clientX/this.viewport.width*2-1,this.mouse.y=-(e.clientY/this.viewport.height)*2+1,this.raycaster.setFromCamera(this.mouse,this.camera);const t=this.raycaster.intersectObjects(this.scene.children);if(t.length>0){let o=t[0].object;o.material.uniforms.uHover.value=t[0].uv}},!1)}update(){const e=this.clock.getElapsedTime();this.materials.forEach(t=>{t.uniforms.uTime.value=e,t.uniforms.uScrollSpeed.value=this.scrollSpeed}),this.asscroll.currentPos>this.minPos&&this.asscroll.currentPos<this.maxPos&&(this.setImagesPositions(),this.render()),window.requestAnimationFrame(this.update)}render(){this.renderer.render(this.scene,this.camera)}}class K extends d{constructor(e,t){super({componentId:"Projects",element:".l__projects",elements:{projectsContainer:".projects__container",projectItem:".project__item"}});this.isDesktop=t,this.projectHeight=document.querySelector(".projects__introduction").offsetHeight+document.querySelector(".projects__container").offsetHeight,this.containerHeight=this.elements.projectsContainer.offsetHeight,this.asscroll=e,this.isDesktop&&(this.loadCanvas(),this.initCustomAnimations())}loadCanvas(){new Y({dom:document.querySelector(".l__projects"),asscroll:this.asscroll})}initCustomAnimations(){n.to(".l__projects",{scrollTrigger:{pin:!0,pinSpacing:!0,trigger:".l__projects",horizontal:!0,end:`${this.containerHeight/1.8}px`}}),n.to(".projects__introduction__title.sans-serif-font",{x:"8rem",scrollTrigger:{trigger:".l__projects",scrub:0,horizontal:!0,start:"left left",end:`${this.containerHeight}px`}}),n.to(".projects__introduction__title.serif-font",{x:"-8rem",scrollTrigger:{trigger:".l__projects",scrub:0,horizontal:!0,start:"left left",end:`${this.containerHeight}px`}}),n.to(".projects__container",{y:this.asscroll.currentPos-this.projectHeight,scrollTrigger:{trigger:".l__projects",scrub:0,horizontal:!0,start:"left left",end:`${this.containerHeight}px`}})}addEventListeners(){this.elements.projectItem.forEach(e=>{e.addEventListener("click",t=>{t.preventDefault(),this.isDesktop?(n.to(".preloader__subline",{xPercent:0,duration:1.5,ease:i.easeInOut,onComplete:()=>window.location.href=`${e.dataset.src}`}),n.to(".preloader__blackline",{xPercent:0,delay:.05,duration:1.6,ease:i.easeInOut,onComplete:()=>window.location.href=`${e.dataset.src}`})):(n.to(".preloader__subline",{yPercent:0,duration:1.5,ease:i.easeInOut}),n.to(".preloader__blackline",{yPercent:0,delay:.05,duration:1.6,ease:i.easeInOut,onComplete:()=>window.location.href=`${e.dataset.src}`}))})})}removeEventListeners(){}}class J extends d{constructor(e){super({componentId:"Separator",element:".l__separator",elements:{aboutSeparator:".about__separator p",separator:".l__separator"}});this.isDesktop=e,this.isDesktop&&this.initAnimation()}initAnimation(){const e=this.elements.separator.querySelector(".separator__top"),t=this.elements.separator.querySelector(".separator__bottom");n.to(e,{yPercent:50,ease:"none",scrollTrigger:{trigger:this.elements.separator,horizontal:!0,scrub:0,scroller:".l__content"}}),n.to(t,{yPercent:-50,ease:"none",scrollTrigger:{trigger:this.elements.separator,horizontal:!0,scrub:0,scroller:".l__content"}}),n.to(this.elements.aboutSeparator,{yPercent:-100,ease:"none",scrollTrigger:{trigger:".l__about",horizontal:!0,scrub:0,scroller:".l__content"}})}}class Q extends d{constructor(e){super({componentId:"About",element:".l__about",elements:{introductionLines:".about__introduction__title",textBand:".about__benefits__bottom-band h2"}});this.isDesktop=e,this.isDesktop&&this.initCustomAnimations()}initCustomAnimations(){Math.floor(Math.random()*2)+1===2&&n.set(".about__introduction__picture img",{filter:"grayscale(100%)"}),n.to(".about__introduction__picture img",{scale:1.5,scrollTrigger:{horizontal:!0,start:"left right",scrub:0,trigger:".about__introduction"}}),n.to(this.elements.introductionLines[0],{x:"-5rem",scrollTrigger:{horizontal:!0,start:"left right",scrub:0,trigger:".about__introduction"}}),n.to(this.elements.introductionLines[2],{x:"-20rem",scrollTrigger:{horizontal:!0,start:"left right",scrub:0,trigger:".about__introduction"}}),n.to(this.elements.introductionLines[3],{x:"5rem",scrollTrigger:{horizontal:!0,start:"left right",scrub:0,trigger:".about__introduction"}}),n.to(this.elements.textBand,{xPercent:20,scrollTrigger:{horizontal:!0,start:"left right",scrub:0,trigger:".about__benefits"}})}addEventListeners(){document.querySelector(".about__character").addEventListener("click",e=>{e.preventDefault(),this.isDesktop?(n.to(".preloader__subline",{xPercent:0,duration:1.5,ease:i.easeInOut,onComplete:()=>window.location.href="/logo.html"}),n.to(".preloader__blackline",{xPercent:0,delay:.05,duration:1.6,ease:i.easeInOut,onComplete:()=>window.location.href="/logo.html"})):(n.to(".preloader__subline",{yPercent:0,duration:1.5,ease:i.easeInOut}),n.to(".preloader__blackline",{yPercent:0,delay:.05,duration:1.6,ease:i.easeInOut,onComplete:()=>window.location.href="/logo.html"}))})}}class Z extends d{constructor(e){super({componentId:"Contact",element:".l__contact",elements:{titleSpans:".contact__title span",backToStart:".backToStart"}});this.asscroll=e,this.initAnimations()}initAnimations(){n.to(n.utils.toArray(this.elements.titleSpans),{y:0,opacity:1,stagger:.1,ease:i.easeOut,duration:1.5,scrollTrigger:{trigger:this.element,start:"left center",horizontal:!0}})}addEventListeners(){this.elements.backToStart.forEach(e=>{e.addEventListener("click",t=>{t.preventDefault(),this.asscroll.scrollTo(0)})})}removeEventListeners(){}}n.registerPlugin(c);class ee extends S{constructor(e){super({id:"main",element:".l__content",elements:{}});this.asscroll=new b({disableRaf:!0,touchScrollType:"scrollTop"}),this.isDesktop=e,this.initScroll(),this.initComponents(),this.initHoverEffect(),this.redirectToProjects(),this.onResize()}initComponents(){new C(this.asscroll).create(),this.landing=new F(this.isDesktop),this.landing.create(),new K(this.asscroll,this.isDesktop).create(),new J(this.isDesktop).create(),new Q(this.isDesktop).create(),new Z(this.asscroll).create()}initScroll(){const e=this.asscroll;n.ticker.add(e.update),c.defaults({scroller:".l__content"}),c.scrollerProxy(".l__content",{scrollLeft(t){return arguments.length?e.currentPos=t:e.currentPos},getBoundingClientRect(){return{top:0,left:0,width:window.innerWidth,height:window.innerHeight}}}),e.on("update",c.update),c.addEventListener("refresh",e.resize),e.enable({horizontalScroll:window.innerWidth>1024,reset:!0})}initHoverEffect(){[...document.querySelectorAll(".menu-item")].forEach(t=>{let o=t.children[0].children[0].innerText.split("");t.children[0].innerHTML="",o.forEach((s,l)=>{t.children[0].innerHTML+=`<span style="--index: ${l}">${s}</span>`});let r=t.children[0].cloneNode(!0);r.style.position="absolute",r.style.left="0",r.style.top="0",r.classList.add("hover-clone"),t.appendChild(r)})}redirectToProjects(){document.referrer.indexOf("projects")>-1&&setTimeout(()=>{this.asscroll.scrollTo(document.querySelector(".l__projects").getBoundingClientRect().left)},200)}show(){this.landing.show()}onResize(){this.asscroll.resize()}}n.registerPlugin(c);class te extends S{constructor(){super({id:"ProjectDetail",element:".l__content",elements:{}});this.asscroll=new b({disableRaf:!0}),this.initScroll(),this.initComponents(),this.initHoverEffect(),this.initClicks(),this.onResize()}initComponents(){new C().create()}initScroll(){const e=this.asscroll;n.ticker.add(e.update),c.defaults({scroller:".l__content"}),c.scrollerProxy(".l__content",{scrollLeft(t){return arguments.length?e.currentPos=t:e.currentPos},getBoundingClientRect(){return{top:0,left:0,width:window.innerWidth,height:window.innerHeight}}}),e.on("update",c.update),c.addEventListener("refresh",e.resize),e.enable({reset:!0,horizontalScroll:!1})}initHoverEffect(){[...document.querySelectorAll(".menu-item")].forEach(t=>{let o=t.children[0].children[0].innerText.split("");t.children[0].innerHTML="",o.forEach((s,l)=>{t.children[0].innerHTML+=`<span style="--index: ${l}">${s}</span>`});let r=t.children[0].cloneNode(!0);r.style.position="absolute",r.style.left="0",r.style.top="0",r.classList.add("hover-clone"),t.appendChild(r)})}initClicks(){[document.querySelector(".project__detail--return"),document.querySelector(".next__project--hover")].forEach(t=>{t.addEventListener("click",o=>{o.preventDefault(),window.innerWidth>1024?(n.to(".preloader__subline",{xPercent:0,duration:1.5,ease:i.easeInOut}),n.to(".preloader__blackline",{xPercent:0,delay:.05,duration:1.6,ease:i.easeInOut,onComplete:()=>window.location.href=`${t.dataset.src}`})):(n.to(".preloader__subline",{yPercent:0,duration:1.5,ease:i.easeInOut,onComplete:()=>window.location.href=`${t.dataset.src}`}),n.to(".preloader__blackline",{yPercent:0,delay:.05,duration:1.6,ease:i.easeInOut,onComplete:()=>window.location.href=`${t.dataset.src}`}))})})}show(){}onResize(){this.asscroll.resize()}}var ne=`uniform vec2 uResolution;\r
+}`;
+class Y {
+    constructor(e) {
+        this.element = e.dom,
+        this.asscroll = e.asscroll,
+        this.viewport = {
+            width: window.innerWidth,
+            height: window.innerHeight
+        },
+        this.loader = new T,
+        this.scrollSpeed = 0,
+        this.clock = new g,
+        this.update = this.update.bind(this),
+        this.allImages = [...document.querySelectorAll(".project__item__img")],
+        this.loadedLength = 0,
+        this.maxPos = document.querySelector(".about__separator").getBoundingClientRect().left + window.innerHeight,
+        this.minPos = document.querySelector(".l__projects").getBoundingClientRect().left,
+        this.mouse = new h,
+        this.raycaster = new j;
+        const t = new Promise((r,s)=>{
+            R(document.querySelectorAll(".project__item__img"), {
+                background: !0
+            }, r)
+        }
+        );
+        this.imagesGroup = new D;
+        let o = [t];
+        Promise.all(o).then(()=>{
+            this.init()
+        }
+        )
+    }
+    init() {
+        this.addCanvas(),
+        this.addScene(),
+        this.addCamera(),
+        this.addImages(),
+        this.setImagesPositions(),
+        this.onMouseMovement(),
+        this.onResize(),
+        this.addEventListeners(),
+        this.update()
+    }
+    addCanvas() {
+        this.renderer = new p({
+            antialias: !0,
+            alpha: !0,
+            powerPreference: "high-performance"
+        }),
+        this.canvas = this.renderer.domElement,
+        this.canvas.classList.add("webgl"),
+        this.element.appendChild(this.canvas)
+    }
+    addScene() {
+        this.scene = new f
+    }
+    addCamera() {
+        this.camera = new x(70,this.viewport.width / this.viewport.height,100,2e3),
+        this.scene.add(this.camera)
+    }
+    addImages() {
+        this.material = new y({
+            uniforms: {
+                uTime: {
+                    value: 0
+                },
+                uImage: {
+                    value: 0
+                },
+                uHover: {
+                    value: new h(.5,.5)
+                },
+                uHoverState: {
+                    value: 0
+                },
+                uScrollSpeed: {
+                    value: this.scrollSpeed
+                },
+                uViewportSizes: {
+                    value: new h(this.viewport.width,this.viewport.height)
+                }
+            },
+            fragmentShader: X,
+            vertexShader: V
+        }),
+        this.materials = [],
+        this.imageStore = this.allImages.map(e=>{
+            let t = e.getBoundingClientRect()
+              , o = new P(t.width,t.height,16,16)
+              , r = this.loader.load(e.src);
+            r.needsUpdate = !0;
+            let s = this.material.clone();
+            this.materials.push(s),
+            s.uniforms.uImage.value = r;
+            let l = new u(o,s);
+            return this.imagesGroup.add(l),
+            e.addEventListener("mouseenter", ()=>{
+                n.to(s.uniforms.uHoverState, {
+                    duration: 1,
+                    value: 1,
+                    ease: "power3.out"
+                })
+            }
+            ),
+            e.addEventListener("mouseout", ()=>{
+                n.to(s.uniforms.uHoverState, {
+                    duration: 1,
+                    value: 0,
+                    ease: "power3.out"
+                })
+            }
+            ),
+            {
+                img: e,
+                mesh: l,
+                top: t.top - window.innerHeight,
+                left: t.left - (window.innerWidth + document.querySelector(".l__separator").offsetWidth),
+                width: t.width,
+                height: t.height
+            }
+        }
+        )
+    }
+    setImagesPositions() {
+        this.scene.add(this.imagesGroup),
+        this.imageStore.forEach(e=>{
+            e.mesh.position.y = -e.top - document.querySelector(".projects__container").getBoundingClientRect().top - this.viewport.height / 2 - e.height / 2,
+            e.mesh.position.x = e.left - this.viewport.width / 2 + e.width / 2
+        }
+        )
+    }
+    addEventListeners() {
+        window.addEventListener("resize", this.onResize.bind(this)),
+        window.addEventListener("wheel", e=>{
+            this.scrollSpeed = (this.asscroll.currentPos - this.asscroll.targetPos) / this.viewport.width * 15
+        }
+        )
+    }
+    onResize() {
+        this.viewport = {
+            width: window.innerWidth,
+            height: window.innerHeight
+        },
+        this.camera.position.z = 700,
+        this.camera.fov = 2 * Math.atan(this.viewport.height / 2 / this.camera.position.z) * (180 / Math.PI),
+        this.camera.aspect = this.viewport.width / this.viewport.height,
+        this.camera.updateProjectionMatrix(),
+        this.renderer.setSize(this.viewport.width, this.viewport.height),
+        this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5)),
+        this.setImagesPositions()
+    }
+    onMouseMovement() {
+        window.addEventListener("mousemove", e=>{
+            this.mouse.x = e.clientX / this.viewport.width * 2 - 1,
+            this.mouse.y = -(e.clientY / this.viewport.height) * 2 + 1,
+            this.raycaster.setFromCamera(this.mouse, this.camera);
+            const t = this.raycaster.intersectObjects(this.scene.children);
+            if (t.length > 0) {
+                let o = t[0].object;
+                o.material.uniforms.uHover.value = t[0].uv
+            }
+        }
+        , !1)
+    }
+    update() {
+        const e = this.clock.getElapsedTime();
+        this.materials.forEach(t=>{
+            t.uniforms.uTime.value = e,
+            t.uniforms.uScrollSpeed.value = this.scrollSpeed
+        }
+        ),
+        this.asscroll.currentPos > this.minPos && this.asscroll.currentPos < this.maxPos && (this.setImagesPositions(),
+        this.render()),
+        window.requestAnimationFrame(this.update)
+    }
+    render() {
+        this.renderer.render(this.scene, this.camera)
+    }
+}
+
+class J extends d {
+    constructor(e) {
+        super({
+            componentId: "Separator",
+            element: ".l__separator",
+            elements: {
+                aboutSeparator: ".about__separator p",
+                separator: ".l__separator"
+            }
+        });
+        this.isDesktop = e,
+        this.isDesktop && this.initAnimation()
+    }
+    initAnimation() {
+        const e = this.elements.separator.querySelector(".separator__top")
+          , t = this.elements.separator.querySelector(".separator__bottom");
+        n.to(e, {
+            yPercent: 50,
+            ease: "none",
+            scrollTrigger: {
+                trigger: this.elements.separator,
+                horizontal: !0,
+                scrub: 0,
+                scroller: ".l__content"
+            }
+        }),
+        n.to(t, {
+            yPercent: -50,
+            ease: "none",
+            scrollTrigger: {
+                trigger: this.elements.separator,
+                horizontal: !0,
+                scrub: 0,
+                scroller: ".l__content"
+            }
+        }),
+        n.to(this.elements.aboutSeparator, {
+            yPercent: -100,
+            ease: "none",
+            scrollTrigger: {
+                trigger: ".l__about",
+                horizontal: !0,
+                scrub: 0,
+                scroller: ".l__content"
+            }
+        })
+    }
+}
+class Q extends d {
+    constructor(e) {
+        super({
+            componentId: "About",
+            element: ".l__about",
+            elements: {
+                introductionLines: ".about__introduction__title",
+                textBand: ".about__benefits__bottom-band h2"
+            }
+        });
+        this.isDesktop = e,
+        this.isDesktop && this.initCustomAnimations()
+    }
+    initCustomAnimations() {
+        Math.floor(Math.random() * 2) + 1 === 2 && n.set(".about__introduction__picture img", {
+            filter: "grayscale(100%)"
+        })
+    }
+    
+}
+class Z extends d {
+    constructor(e) {
+        super({
+            componentId: "Contact",
+            element: ".l__contact",
+            elements: {
+                titleSpans: ".contact__title span",
+                backToStart: ".backToStart"
+            }
+        });
+        this.asscroll = e,
+        this.initAnimations()
+    }
+    initAnimations() {
+        n.to(n.utils.toArray(this.elements.titleSpans), {
+            y: 0,
+            opacity: 1,
+            stagger: .1,
+            ease: i.easeOut,
+            duration: 1.5,
+            scrollTrigger: {
+                trigger: this.element,
+                start: "left center",
+                horizontal: !0
+            }
+        })
+    }
+    addEventListeners() {
+        this.elements.backToStart.forEach(e=>{
+            e.addEventListener("click", t=>{
+                t.preventDefault(),
+                this.asscroll.scrollTo(0)
+            }
+            )
+        }
+        )
+    }
+    removeEventListeners() {}
+}
+n.registerPlugin(c);
+class ee extends S {
+    constructor(e) {
+        super({
+            id: "main",
+            element: ".l__content",
+            elements: {}
+        });
+        this.asscroll = new b({
+            disableRaf: !0,
+            touchScrollType: "scrollTop"
+        }),
+        this.isDesktop = e,
+        this.initScroll(),
+        this.initComponents(),
+        this.initHoverEffect(),
+        this.redirectToProjects(),
+        this.onResize()
+    }
+    initComponents() {
+        new C(this.asscroll).create(),
+        this.landing = new F(this.isDesktop),
+        this.landing.create(),
+
+        new J(this.isDesktop).create(),
+        new Q(this.isDesktop).create(),
+        new Z(this.asscroll).create()
+    }
+    initScroll() {
+        const e = this.asscroll;
+        n.ticker.add(e.update),
+        c.defaults({
+            scroller: ".l__content"
+        }),
+        c.scrollerProxy(".l__content", {
+            scrollLeft(t) {
+                return arguments.length ? e.currentPos = t : e.currentPos
+            },
+            getBoundingClientRect() {
+                return {
+                    top: 0,
+                    left: 0,
+                    width: window.innerWidth,
+                    height: window.innerHeight
+                }
+            }
+        }),
+        e.on("update", c.update),
+        c.addEventListener("refresh", e.resize),
+        e.enable({
+            horizontalScroll: window.innerWidth > 1024,
+            reset: !0
+        })
+    }
+    initHoverEffect() {
+        [...document.querySelectorAll(".menu-item")].forEach(t=>{
+            let o = t.children[0].children[0].innerText.split("");
+            t.children[0].innerHTML = "",
+            o.forEach((s,l)=>{
+                t.children[0].innerHTML += `<span style="--index: ${l}">${s}</span>`
+            }
+            );
+            let r = t.children[0].cloneNode(!0);
+            r.style.position = "absolute",
+            r.style.left = "0",
+            r.style.top = "0",
+            r.classList.add("hover-clone"),
+            t.appendChild(r)
+        }
+        )
+    }
+    redirectToProjects() {
+        document.referrer.indexOf("projects") > -1 && setTimeout(()=>{
+            this.asscroll.scrollTo(document.querySelector(".l__projects").getBoundingClientRect().left)
+        }
+        , 200)
+    }
+    show() {
+        this.landing.show()
+    }
+    onResize() {
+        this.asscroll.resize()
+    }
+}
+n.registerPlugin(c);
+class te extends S {
+    constructor() {
+        super({
+            id: "ProjectDetail",
+            element: ".l__content",
+            elements: {}
+        });
+        this.asscroll = new b({
+            disableRaf: !0
+        }),
+        this.initScroll(),
+        this.initComponents(),
+        this.initHoverEffect(),
+        this.initClicks(),
+        this.onResize()
+    }
+    initComponents() {
+        new C().create()
+    }
+    initScroll() {
+        const e = this.asscroll;
+        n.ticker.add(e.update),
+        c.defaults({
+            scroller: ".l__content"
+        }),
+        c.scrollerProxy(".l__content", {
+            scrollLeft(t) {
+                return arguments.length ? e.currentPos = t : e.currentPos
+            },
+            getBoundingClientRect() {
+                return {
+                    top: 0,
+                    left: 0,
+                    width: window.innerWidth,
+                    height: window.innerHeight
+                }
+            }
+        }),
+        e.on("update", c.update),
+        c.addEventListener("refresh", e.resize),
+        e.enable({
+            reset: !0,
+            horizontalScroll: !1
+        })
+    }
+    initHoverEffect() {
+        [...document.querySelectorAll(".menu-item")].forEach(t=>{
+            let o = t.children[0].children[0].innerText.split("");
+            t.children[0].innerHTML = "",
+            o.forEach((s,l)=>{
+                t.children[0].innerHTML += `<span style="--index: ${l}">${s}</span>`
+            }
+            );
+            let r = t.children[0].cloneNode(!0);
+            r.style.position = "absolute",
+            r.style.left = "0",
+            r.style.top = "0",
+            r.classList.add("hover-clone"),
+            t.appendChild(r)
+        }
+        )
+    }
+    initClicks() {
+        [document.querySelector(".project__detail--return"), document.querySelector(".next__project--hover")].forEach(t=>{
+            t.addEventListener("click", o=>{
+                o.preventDefault(),
+                window.innerWidth > 1024 ? (n.to(".preloader__subline", {
+                    xPercent: 0,
+                    duration: 1.5,
+                    ease: i.easeInOut
+                }),
+                n.to(".preloader__blackline", {
+                    xPercent: 0,
+                    delay: .05,
+                    duration: 1.6,
+                    ease: i.easeInOut,
+                    onComplete: ()=>window.location.href = `${t.dataset.src}`
+                })) : (n.to(".preloader__subline", {
+                    yPercent: 0,
+                    duration: 1.5,
+                    ease: i.easeInOut,
+                    onComplete: ()=>window.location.href = `${t.dataset.src}`
+                }),
+                n.to(".preloader__blackline", {
+                    yPercent: 0,
+                    delay: .05,
+                    duration: 1.6,
+                    ease: i.easeInOut,
+                    onComplete: ()=>window.location.href = `${t.dataset.src}`
+                }))
+            }
+            )
+        }
+        )
+    }
+    show() {}
+    onResize() {
+        this.asscroll.resize()
+    }
+}
+var ne = `uniform vec2 uResolution;\r
 uniform float uTime;
 
 uniform float R;\r
@@ -432,10 +1338,174 @@ float snoise(vec3 v)\r
                 vec3 color=vec3(vUv,uResolution);\r
                 \r
                 gl_FragColor=vec4(cos(len+R),cos(len+G),cos(len+B),.1);\r
-            }`,re=`varying vec2 vUv;
+            }`
+  , re = `varying vec2 vUv;
 
 void main() {\r
     gl_Position = projectionMatrix * viewMatrix * modelMatrix * vec4(position, 1.0);
 
     vUv = uv;\r
-}`;class ie{constructor(e){this.container=document.getElementById("logoPage"),this.scene=new f,this.gltfLoader=new O,this.dracoLoader=new U,this.mouse={x:0,y:0},this.width=this.container.offsetWidth,this.height=this.container.offsetHeight,this.clock=new g,this.camera=new x(70,this.width/this.height,100,2e3),this.camera.position.z=350,this.camera.fov=2*Math.atan(this.height/2/this.camera.position.z)*(180/Math.PI),this.time=0,this.renderer=new p({antialias:!0,alpha:!1}),document.querySelector("#logoPage canvas")||this.container.appendChild(this.renderer.domElement),this.addBackgroundObject(),this.addModel(),this.resize(),this.setupResize(),this.render()}lerp(e,t,o){return e*(1-o)+t*o}setupResize(){window.addEventListener("resize",this.resize.bind(this)),window.addEventListener("mousemove",e=>{this.onMouseMove(e)})}onMouseMove(e){let t=this.mouse.x,o=this.mouse.y;this.mouse.x=this.lerp(t,e.clientX/this.width-.5,1),this.mouse.y=this.lerp(o,e.clientY/this.height-.5,1)}resize(){this.width=this.container.offsetWidth,this.height=this.container.offsetHeight,this.renderer.setSize(this.width,this.height),this.camera.aspect=this.width/this.height,this.camera.updateProjectionMatrix()}addBackgroundObject(){this.backgroundMaterial=new y({vertexShader:re,fragmentShader:ne,side:q,uniforms:{uResolution:{value:new h(this.width,this.height)},uTime:{value:0},R:{value:242.8},G:{value:500},B:{value:85}}}),this.backgroundGeometry=new P(this.container.offsetWidth,this.container.offsetHeight,64,64),this.backgroundMesh=new u(this.backgroundGeometry,this.backgroundMaterial),this.scene.add(this.backgroundMesh)}addModel(){this.dracoLoader.setDecoderPath("/examples/js/libs/draco/"),this.gltfLoader.setDRACOLoader(this.dracoLoader),this.modelMaterial=new H({metalness:3,roughness:8.8,reflectivity:20,transmission:1.7,thickness:2.1,clearcoat:7.3,color:new A("#9e9e9e"),emissive:0}),this.gltfLoader.load("/assets/logo.gltf",e=>{this.modelGeometry=e.scene.children[0].geometry,this.modelMesh=new u(this.modelGeometry,this.modelMaterial),this.modelMesh.scale.set(500,500,500),this.modelMesh.position.set(0,0,200),this.modelMesh.rotation.set(1.5,0,0),this.scene.add(this.modelMesh)})}render(){this.modelMesh&&(this.modelMesh.rotation.z=this.lerp(this.modelMesh.rotation.z,-this.mouse.x*1.25,.075),this.modelMesh.rotation.x=this.lerp(this.modelMesh.rotation.y,20+this.mouse.y*20,.075)),this.renderer.render(this.scene,this.camera),this.backgroundMaterial.uniforms.uTime.value=this.clock.getElapsedTime(),window.requestAnimationFrame(this.render.bind(this))}addGui(){this.GUI.add(this.backgroundMaterial.uniforms.R,"value").min(0).max(500).step(.1).name("R"),this.GUI.add(this.backgroundMaterial.uniforms.G,"value").min(0).max(500).step(.1).name("G"),this.GUI.add(this.backgroundMaterial.uniforms.B,"value").min(0).max(500).step(.1).name("B"),this.GUI.add(this.camera.position,"z").min(0).max(5e3).step(1)}show(){}}class oe{constructor(){this.isDesktop=window.innerWidth>1024,this.createContent(),this.createPreloader(),this.addEventListeners(),this.onResize()}createPreloader(){this.preloader=new G(this.isDesktop),this.preloader.once("completed",this.onPreloaded.bind(this))}onPreloaded(){this.currentPage.show()}createContent(){this.content=document.querySelector(".l__content"),this.template=this.content.getAttribute("data-template"),this.template==="mainPage"&&(this.currentPage=new ee(this.isDesktop)),this.template==="ProjectDetail"&&(this.currentPage=new te(this.isDesktop)),this.template==="logoPage"&&(this.currentPage=new ie)}reloadOnResize(){function e(o,r){var r=r||100,s;return function(l){s&&clearTimeout(s),s=setTimeout(o,r,l)}}function t(){location.reload()}window.addEventListener("resize",e(t,150))}onResize(){this.isDesktop=window.innerWidth>1024,this.isDesktop&&this.reloadOnResize()}addEventListeners(){window.addEventListener("resize",()=>{this.onResize()})}}new oe;
+}`;
+class ie {
+    constructor(e) {
+        this.container = document.getElementById("logoPage"),
+        this.scene = new f,
+        this.gltfLoader = new O,
+        this.dracoLoader = new U,
+        this.mouse = {
+            x: 0,
+            y: 0
+        },
+        this.width = this.container.offsetWidth,
+        this.height = this.container.offsetHeight,
+        this.clock = new g,
+        this.camera = new x(70,this.width / this.height,100,2e3),
+        this.camera.position.z = 350,
+        this.camera.fov = 2 * Math.atan(this.height / 2 / this.camera.position.z) * (180 / Math.PI),
+        this.time = 0,
+        this.renderer = new p({
+            antialias: !0,
+            alpha: !1
+        }),
+        document.querySelector("#logoPage canvas") || this.container.appendChild(this.renderer.domElement),
+        this.addBackgroundObject(),
+        this.addModel(),
+        this.resize(),
+        this.setupResize(),
+        this.render()
+    }
+    lerp(e, t, o) {
+        return e * (1 - o) + t * o
+    }
+    setupResize() {
+        window.addEventListener("resize", this.resize.bind(this)),
+        window.addEventListener("mousemove", e=>{
+            this.onMouseMove(e)
+        }
+        )
+    }
+    onMouseMove(e) {
+        let t = this.mouse.x
+          , o = this.mouse.y;
+        this.mouse.x = this.lerp(t, e.clientX / this.width - .5, 1),
+        this.mouse.y = this.lerp(o, e.clientY / this.height - .5, 1)
+    }
+    resize() {
+        this.width = this.container.offsetWidth,
+        this.height = this.container.offsetHeight,
+        this.renderer.setSize(this.width, this.height),
+        this.camera.aspect = this.width / this.height,
+        this.camera.updateProjectionMatrix()
+    }
+    addBackgroundObject() {
+        this.backgroundMaterial = new y({
+            vertexShader: re,
+            fragmentShader: ne,
+            side: q,
+            uniforms: {
+                uResolution: {
+                    value: new h(this.width,this.height)
+                },
+                uTime: {
+                    value: 0
+                },
+                R: {
+                    value: 242.8
+                },
+                G: {
+                    value: 500
+                },
+                B: {
+                    value: 85
+                }
+            }
+        }),
+        this.backgroundGeometry = new P(this.container.offsetWidth,this.container.offsetHeight,64,64),
+        this.backgroundMesh = new u(this.backgroundGeometry,this.backgroundMaterial),
+        this.scene.add(this.backgroundMesh)
+    }
+    addModel() {
+        this.dracoLoader.setDecoderPath("/examples/js/libs/draco/"),
+        this.gltfLoader.setDRACOLoader(this.dracoLoader),
+        this.modelMaterial = new H({
+            metalness: 3,
+            roughness: 8.8,
+            reflectivity: 20,
+            transmission: 1.7,
+            thickness: 2.1,
+            clearcoat: 7.3,
+            color: new A("#9e9e9e"),
+            emissive: 0
+        }),
+        this.gltfLoader.load("/assets/logo.gltf", e=>{
+            this.modelGeometry = e.scene.children[0].geometry,
+            this.modelMesh = new u(this.modelGeometry,this.modelMaterial),
+            this.modelMesh.scale.set(500, 500, 500),
+            this.modelMesh.position.set(0, 0, 200),
+            this.modelMesh.rotation.set(1.5, 0, 0),
+            this.scene.add(this.modelMesh)
+        }
+        )
+    }
+    render() {
+        this.modelMesh && (this.modelMesh.rotation.z = this.lerp(this.modelMesh.rotation.z, -this.mouse.x * 1.25, .075),
+        this.modelMesh.rotation.x = this.lerp(this.modelMesh.rotation.y, 20 + this.mouse.y * 20, .075)),
+        this.renderer.render(this.scene, this.camera),
+        this.backgroundMaterial.uniforms.uTime.value = this.clock.getElapsedTime(),
+        window.requestAnimationFrame(this.render.bind(this))
+    }
+    addGui() {
+        this.GUI.add(this.backgroundMaterial.uniforms.R, "value").min(0).max(500).step(.1).name("R"),
+        this.GUI.add(this.backgroundMaterial.uniforms.G, "value").min(0).max(500).step(.1).name("G"),
+        this.GUI.add(this.backgroundMaterial.uniforms.B, "value").min(0).max(500).step(.1).name("B"),
+        this.GUI.add(this.camera.position, "z").min(0).max(5e3).step(1)
+    }
+    show() {}
+}
+class oe {
+    constructor() {
+        this.isDesktop = window.innerWidth > 1024,
+        this.createContent(),
+        this.createPreloader(),
+        this.addEventListeners(),
+        this.onResize()
+    }
+    createPreloader() {
+        this.preloader = new G(this.isDesktop),
+        this.preloader.once("completed", this.onPreloaded.bind(this))
+    }
+    onPreloaded() {
+        this.currentPage.show()
+    }
+    createContent() {
+        this.content = document.querySelector(".l__content"),
+        this.template = this.content.getAttribute("data-template"),
+        this.template === "mainPage" && (this.currentPage = new ee(this.isDesktop)),
+        this.template === "ProjectDetail" && (this.currentPage = new te(this.isDesktop)),
+        this.template === "logoPage" && (this.currentPage = new ie)
+    }
+    reloadOnResize() {
+        function e(o, r) {
+            var r = r || 100, s;
+            return function(l) {
+                s && clearTimeout(s),
+                s = setTimeout(o, r, l)
+            }
+        }
+        function t() {
+            location.reload()
+        }
+        window.addEventListener("resize", e(t, 150))
+    }
+    onResize() {
+        this.isDesktop = window.innerWidth > 1024,
+        this.isDesktop && this.reloadOnResize()
+    }
+    addEventListeners() {
+        window.addEventListener("resize", ()=>{
+            this.onResize()
+        }
+        )
+    }
+}
+new oe;
